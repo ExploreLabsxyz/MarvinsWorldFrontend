@@ -86,9 +86,7 @@ export default function ClientLayout({
           </Button>
         )}
       </div>
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2">
-        <h1 className="text-2xl font-bold">Yap</h1>
-      </div>
+
       {children}
       <AccountModal />
       <InvitesModal

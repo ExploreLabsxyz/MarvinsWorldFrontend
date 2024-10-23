@@ -10,14 +10,13 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "./../ui/dialog";
-
+} from "@/components/ui/dialog";
 import { SERVER_URL } from "@/lib/utils";
 import { usePrivy } from "@privy-io/react-auth";
 import { ImageUpload } from "@/components/ImageUpload";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import * as amplitude from "@amplitude/analytics-browser";
 
 export function AccountModal() {
@@ -79,13 +78,13 @@ export function AccountModal() {
   return (
     <Dialog
       open={isAccountModalOpen}
-      onOpenChange={(open: any) => dispatch(setIsAccountModalOpen(open))}
+      onOpenChange={(open) => dispatch(setIsAccountModalOpen(open))}
     >
-      <DialogContent>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Account Settings</DialogTitle>
         </DialogHeader>
-        <div className="space-y-4">
+        <div className="grid gap-4 py-4">
           <ImageUpload
             currentImage={user?.pfp}
             onImageChange={handleImageChange}
@@ -94,14 +93,14 @@ export function AccountModal() {
           <Input
             placeholder="Username"
             value={username}
-            onChange={(e: any) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Textarea
             placeholder="Description"
             value={description}
-            onChange={(e: any) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
-          <div className="flex flex-row justify-between ">
+          <div className="flex justify-between">
             <Button onClick={handleUpdateAccount}>Update Account</Button>
             <Button variant="destructive" onClick={handleLogout}>
               Logout
