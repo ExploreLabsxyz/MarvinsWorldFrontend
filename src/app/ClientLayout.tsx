@@ -77,12 +77,16 @@ export default function ClientLayout({
               dispatch(setIsAccountModalOpen(true));
               amplitude.track("Open Account Modal", { userId: user?.id });
             }}
+            className="font-pixel rounded-full bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-white px-6 py-2 transition-all hover:shadow-lg hover:scale-105"
           >
-            Account
+            ACCOUNT
           </Button>
         ) : (
-          <Button className="" onClick={login}>
-            Login
+          <Button
+            className="font-pixel rounded-full bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-white px-6 py-2 transition-all hover:shadow-lg hover:scale-105"
+            onClick={login}
+          >
+            CONNECT WALLET
           </Button>
         )}
       </div>
