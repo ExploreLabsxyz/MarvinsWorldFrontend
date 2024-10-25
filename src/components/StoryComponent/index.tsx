@@ -70,6 +70,7 @@ const StoryStreamer = () => {
     const eventSource = new EventSource("http://localhost:4000/story");
 
     eventSource.onmessage = (event) => {
+      console.log(event.data);
       if (event.data === "[DONE]") {
         setLoading(false);
         setIsComplete(true);

@@ -1,3 +1,4 @@
+"use client";
 // src/components/ImageUpload/index.tsx
 import React, { useState, useRef, useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
