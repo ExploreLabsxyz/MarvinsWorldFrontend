@@ -52,7 +52,6 @@ export function useCharacterSocket(initialSeasonId?: string) {
 
     // Add seasons handler
     socketInstance.on("seasons_data", (seasonsData: Season[]) => {
-      console.log("seasonsData", seasonsData);
       setSeasons(seasonsData);
       // Set the current season to the last season in the list
       setCurrentSeasonId(seasonsData[seasonsData.length - 1].id);
@@ -106,8 +105,6 @@ export function useCharacterSocket(initialSeasonId?: string) {
     socketInstance.on(
       "character_update",
       ({ type, data }: { type: string; data: Character }) => {
-        console.log(data);
-        console.log("type", type);
         // Only process updates for the current season
         setCharacters((prev) => {
           switch (type) {
@@ -128,8 +125,6 @@ export function useCharacterSocket(initialSeasonId?: string) {
     socketInstance.on(
       "story_update",
       ({ type, data }: { type: string; data: Story }) => {
-        console.log(data);
-        console.log("type", type);
         setStories((prev) => {
           switch (type) {
             case "INSERT":

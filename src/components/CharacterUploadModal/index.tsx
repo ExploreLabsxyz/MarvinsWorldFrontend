@@ -59,7 +59,6 @@ export default function CharacterUploadModal({
         },
         body: imageFormData,
       });
-      console.log(imageResponse);
       if (!imageResponse.ok) {
         throw new Error("Failed to upload image");
       }
@@ -67,7 +66,6 @@ export default function CharacterUploadModal({
       const { embeds } = await imageResponse.json();
       const imageObject = embeds[0];
       const imageUrl = imageObject.image;
-      console.log(imageUrl);
 
       // Then create the character with the image URL
       const characterResponse = await fetch(`${SERVER_URL}/characters`, {
@@ -82,7 +80,6 @@ export default function CharacterUploadModal({
           imageUrl,
         }),
       });
-      console.log(characterResponse);
       if (!characterResponse.ok) {
         throw new Error("Failed to create character");
       }
@@ -98,7 +95,6 @@ export default function CharacterUploadModal({
       setImage(null);
       onClose();
     } catch (error) {
-      console.log("Error creating character:", error);
       toast({
         title: "Error",
         description: "Failed to create character. Please try again.",
