@@ -68,12 +68,16 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
+    } else {
+      setCurrentPage(1);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+    } else {
+      setCurrentPage(totalPages);
     }
   };
 
@@ -179,8 +183,9 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <span
-                      className={`
+                    <div className="flex items-center w-full text-left gap-2">
+                      <span
+                        className={`
                       font-medium text-xs
                       ${
                         char.status === "eliminated"
@@ -188,16 +193,17 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
                           : "text-nintendo-green"
                       }
                     `}
-                    >
-                      {char.name}
-                    </span>
+                      >
+                        {char.name}
+                      </span>
+                    </div>
                   </div>
                   {char.status === "eliminated" && (
                     <div className="absolute top-1 right-1">
                       <Skull className="h-3 w-3 text-nintendo-red" />
                     </div>
                   )}
-                  <div className="absolute bottom-1 right-1">
+                  <div className="absolute top-1 right-1">
                     <div className="text-[10px] text-gray-500 dark:text-gray-400">
                       {char.status === "eliminated" ? "Eliminated" : "Active"}
                     </div>
@@ -280,10 +286,21 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
                 onScroll={handleScroll}
                 className="flex-grow overflow-y-auto bg-gray-100 dark:bg-gray-800 border-2 border-nintendo-blue dark:border-nintendo-gold rounded-lg p-6 relative transition-colors duration-200"
               >
-                {currentStories.map((story) => (
-                  <p className="font-story text-nintendo-blue dark:text-nintendo-gold text-sm md:text-lg leading-relaxed">
-                    {story.content}
-                  </p>
+                {currentStories.map((story: any) => (
+                  <div key={story.id} className="mb-4">
+                    {story.image_url && (
+                      <div className="mb-4 flex justify-center">
+                        <img
+                          src={story.image_url}
+                          alt={story.name}
+                          className="rounded-lg max-h-[300px] object-contain border-red-500 border-2"
+                        />
+                      </div>
+                    )}
+                    <p className="font-story text-nintendo-blue dark:text-nintendo-gold text-sm md:text-lg leading-relaxed">
+                      {story.content}
+                    </p>
+                  </div>
                 ))}
                 {isSocketLoading && (
                   <div className="flex items-center justify-center gap-2 mt-4">
@@ -305,7 +322,6 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
                 <div className="flex justify-center mt-4">
                   <Button
                     onClick={handlePrevPage}
-                    disabled={currentPage === 1}
                     className="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-all duration-200"
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -315,7 +331,6 @@ const StoryStreamer: React.FC<StoryComponentProps> = ({ seasonId }) => {
                   </span>
                   <Button
                     onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
                     className="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full shadow-md transform hover:scale-105 transition-all duration-200"
                   >
                     <ChevronRight className="h-4 w-4" />
